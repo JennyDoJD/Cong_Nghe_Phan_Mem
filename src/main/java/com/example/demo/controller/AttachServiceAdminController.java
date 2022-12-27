@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AttachServiceDTO;
+import com.example.demo.dto.ServiceDTO;
+import com.example.demo.model.AttachService;
+import com.example.demo.model.Service;
 import com.example.demo.model.AttachService;
 import com.example.demo.service.IAttachServiceService;
 import org.springframework.beans.BeanUtils;
@@ -22,11 +25,16 @@ public class AttachServiceAdminController {
     @Autowired
     IAttachServiceService iAttachServiceService;
 
-
-    @GetMapping("delete")
-    public String delete(@RequestParam int attach_service_id, RedirectAttributes redirectAttributes) {
-        iAttachServiceService.delete(attach_service_id);
-        redirectAttributes.addFlashAttribute("mess", "Delete successfully!");
-        return "redirect:/camping/listAttachServiceAdmin";
+    @GetMapping("")
+    public String getList(Model model, @RequestParam(defaultValue = "0") int page,
+                          Optional<String> attachServiceNameSearch) {
+        String attachServiceNameSearchValue = "";
+        if(attachServiceNameSearch.isPresent()) {
+            attachServiceNameSearchValue = attachServiceNameSearch.get();
+        }
+        model.addAttribute("attachServiceNameSearch", attachServiceNameSearchValue);
+        Page<AttachService> attachServices = iAttachServiceService.findByAll(PageRequest.of(page, 4), attachServiceNameSearchValue);
+        model.addAttribute("attachServices", attachServices);
+        return "camping/admin/listAttachService";
     }
 }
