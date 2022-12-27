@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.AttachService;
 import com.example.demo.model.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,4 +20,11 @@ public interface IServiceService {
     Optional<Service> findById(int service_id);
 
     void delete (int service_id);
+
+    void delete (int service_id
+    
+    Page<Service> findByAll(Pageable pageable, String serviceNameSearch, String attachServiceIdSearch);
+
+    void delete (int service_id);
+
 }
