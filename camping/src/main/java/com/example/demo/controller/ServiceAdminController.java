@@ -23,7 +23,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("camping/listServiceAdmin")
 public class ServiceAdminController {
-    @Autowired
+   @Autowired
     IServiceService serviceService;
 
     @Autowired
@@ -33,12 +33,6 @@ public class ServiceAdminController {
     public List<AttachService> attachServiceList() {
         return iAttachServiceService.findAll();
     }
-
-    @GetMapping("delete")
-    public String delete(@RequestParam int service_id, RedirectAttributes redirectAttributes) {
-        serviceService.delete(service_id);
-        redirectAttributes.addFlashAttribute("mess", "Delete successfully!");
-        return "redirect:/camping/listServiceAdmin";
 
     @GetMapping("")
     public String getList(Model model, @RequestParam(defaultValue = "0") int page,
@@ -56,11 +50,40 @@ public class ServiceAdminController {
         Page<Service> services = serviceService.findByAll(PageRequest.of(page, 4), serviceNameSearchValue, attachServiceIdSearchValue);
         model.addAttribute("services", services);
         return "camping/admin/listService";
+    }
+
+    @GetMapping("create")
+    public String showCreateService(Model model) {
+        model.addAttribute("serviceDTO", new ServiceDTO());
+        return "camping/admin/createService";
+    }
+
+    @PostMapping("save")
+    public String save(@ModelAttribute @Validated ServiceDTO serviceDTO, BindingResult bindingResult, Model model){
+        Service service = new Service();
+        if (bindingResult.hasErrors()){
+            model.addAttribute("mess", "Add not successfully!");
+            return "camping/admin/createService";
+        }else {
+            BeanUtils.copyProperties(serviceDTO, service);
+            serviceService.save(service);
+            model.addAttribute("serviceDTO", serviceDTO);
+            model.addAttribute("mess", "Add successfully!");
+        }
+        return "redirect:/camping/listServiceAdmin";
+    }
 
     @GetMapping("edit")
     public String showEditService(Model model, @RequestParam int service_id) {
         Service service = serviceService.findById(service_id).orElse(null);
         model.addAttribute("serviceDTO", service);
         return "camping/admin/updateService";
+    }
+
+    @GetMapping("delete")
+    public String delete(@RequestParam int service_id, RedirectAttributes redirectAttributes) {
+        serviceService.delete(service_id);
+        redirectAttributes.addFlashAttribute("mess", "Delete successfully!");
+        return "redirect:/camping/listServiceAdmin";
     }
 }
