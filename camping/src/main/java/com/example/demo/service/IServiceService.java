@@ -19,6 +19,8 @@ public interface IServiceService {
 
     Optional<Service> findById(int service_id);
 
+    void delete (int service_id);
+
     void delete (int service_id
     
     Page<Service> findByAll(Pageable pageable, String serviceNameSearch, String attachServiceIdSearch);
