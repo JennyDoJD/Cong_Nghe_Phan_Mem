@@ -4,6 +4,7 @@ import com.example.demo.dto.AttachServiceDTO;
 import com.example.demo.dto.ServiceDTO;
 import com.example.demo.model.AttachService;
 import com.example.demo.model.Service;
+import com.example.demo.model.AttachService;
 import com.example.demo.service.IAttachServiceService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,4 @@ public class AttachServiceAdminController {
         model.addAttribute("attachServices", attachServices);
         return "camping/admin/listAttachService";
     }
-
 }
