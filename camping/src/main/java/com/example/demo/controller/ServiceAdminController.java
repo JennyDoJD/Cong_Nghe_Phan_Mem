@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ServiceDTO;
+import com.example.demo.model.AttachService;
+import com.example.demo.model.Service;
 import com.example.demo.model.*;
 import com.example.demo.service.IAttachServiceService;
 import com.example.demo.service.IServiceService;
@@ -31,6 +33,12 @@ public class ServiceAdminController {
     public List<AttachService> attachServiceList() {
         return iAttachServiceService.findAll();
     }
+
+    @GetMapping("delete")
+    public String delete(@RequestParam int service_id, RedirectAttributes redirectAttributes) {
+        serviceService.delete(service_id);
+        redirectAttributes.addFlashAttribute("mess", "Delete successfully!");
+        return "redirect:/camping/listServiceAdmin";
 
     @GetMapping("")
     public String getList(Model model, @RequestParam(defaultValue = "0") int page,

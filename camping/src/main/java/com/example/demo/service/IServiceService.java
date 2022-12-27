@@ -11,7 +11,16 @@ import java.util.Optional;
 public interface IServiceService {
     List<Service> findAll();
 
+    Page<Service> findAll(Pageable pageable);
+
     Page<Service> findByAll(Pageable pageable, String serviceNameSearch, String attachServiceIdSearch);
 
+    void save(Service service);
+
+    Optional<Service> findById(int service_id);
+
+    void delete (int service_id
+    
+    Page<Service> findByAll(Pageable pageable, String serviceNameSearch, String attachServiceIdSearch);
 
 }
