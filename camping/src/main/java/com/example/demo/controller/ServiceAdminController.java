@@ -56,5 +56,11 @@ public class ServiceAdminController {
         Page<Service> services = serviceService.findByAll(PageRequest.of(page, 4), serviceNameSearchValue, attachServiceIdSearchValue);
         model.addAttribute("services", services);
         return "camping/admin/listService";
+
+    @GetMapping("edit")
+    public String showEditService(Model model, @RequestParam int service_id) {
+        Service service = serviceService.findById(service_id).orElse(null);
+        model.addAttribute("serviceDTO", service);
+        return "camping/admin/updateService";
     }
 }

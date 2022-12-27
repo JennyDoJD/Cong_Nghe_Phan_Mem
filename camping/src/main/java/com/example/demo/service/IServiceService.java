@@ -23,4 +23,6 @@ public interface IServiceService {
     
     Page<Service> findByAll(Pageable pageable, String serviceNameSearch, String attachServiceIdSearch);
 
+    void delete (int service_id);
+
 }
