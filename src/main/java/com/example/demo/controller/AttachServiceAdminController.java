@@ -72,4 +72,11 @@ public class AttachServiceAdminController {
         model.addAttribute("attachServices", attachServices);
         return "camping/admin/listAttachService";
     }
+    
+    @GetMapping("delete")
+    public String delete(@RequestParam int attach_service_id, RedirectAttributes redirectAttributes) {
+        iAttachServiceService.delete(attach_service_id);
+        redirectAttributes.addFlashAttribute("mess", "Delete successfully!");
+        return "redirect:/camping/listAttachServiceAdmin";
+    }
 }
