@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/style.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        header{
+            position: relative;
+            background-size: cover;
+            height: 600px;
+            width: 100%;
+            background-position: center;
+            background: url("https://havicotour.com.vn/wp-content/uploads/2020/08/l%E1%BB%81u-c%E1%BA%AFm-tr%E1%BA%A1i.jpg") no-repeat;
+            background-size: 1250px;
+            overflow-x: hidden;
+        }
+
+        header::before{
+            position: absolute;
+            content: "";
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        nav{
+            position: fixed;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1;
+        }
+
+        nav .logo a{
+            text-decoration: none;
+            color: #fff;
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        nav .menu{
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .menu ul{
+            display: flex;
+        }
+
+        .menu ul li{
+            list-style: none;
+            margin-left: 7px;
+        }
+
+        .menu ul li a{
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .menu ul li.active a{
+            background: #fdcb6e;
+            color: #000;
+        }
+
+        .menu ul li a:hover{
+            background: #fdcb6e;
+            color: #000;
+
+        }
+
+        .container{
+            max-width: 1170px;
+            margin-left: 250px;
+        }
+
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        ul{
+            list-style: none;
+        }
+
+        .footer{
+            background-color: #fdcb6e;
+            padding: 70px 0;
+            overflow-x: hidden;
+        }
+
+        .footer-col{
+            width: 25%;
+            padding: 0 15px;
+        }
+
+        .footer-col h4{
+            font-size: 18px;
+            color: black;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .footer-col h4::before{
+            content: '';
+            position: absolute;
+            left:0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
+        }
+
+        .footer-col ul li:not(:last-child){
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a{
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 300;
+            color: white;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li p{
+            font-size: 16px;
+            text-transform: none;
+            color: #ccc;
+            text-decoration: none;
+            font-weight: 300;
+            color: white;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col ul li a:hover{
+            color: #ccc;
+            padding-left: 8px;
+        }
+
+        .footer-col .social-links a{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin:0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.5s ease;
+        }
+
+        .footer-col .social-links a:hover{
+            color: #24262b;
+            background-color: #ffffff;
+        }
+
+        .footer-c{
+            margin-left: 300px;
+            margin-top: 50px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="menu">
+            <div class="logo">
+                <a href="">COCO ECOLODGE</a>
+            </div>
+            <ul>
+                <li><a href="">HOME</a>
+                <li><a href="camping/listServiceAdmin">COCO CAMPING</a>
+                <li><a href="camping/listAttachServiceAdmin">ATTACH SERVICE</a></li>
+                <li><a href="">CONTACTS</a></li>
+                <li><a href="camping/login">LOGIN</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<form th:action = "@{/camping/listUserAdmin/saveOrUpdate}" method = "post" th:object="${userDTO}">
+    <h3 style="text-align: center; margin-top:50px">Create Customer</h3><br>
+
+
+
+    <p style = "margin-left: 400px">Name of User:</p>
+    <input style="width: 500px; margin-left: 400px" type = "text" name = "user_name" th:field=" *{user_name}" class="form-control" aria-describedby="basic-addon1"/>
+    <span th:if="${#fields.hasErrors('user_name')}" th:errors="*{user_name}"
+          th:class="${#fields.hasErrors('user_name')}? errors"></span><br>
+
+    <p style = "margin-left: 400px">Date of birth:</p>
+    <input style="width: 500px; margin-left: 400px" type = "text" name = "user_birthday" th:field=" *{user_birthday}" class="form-control" aria-describedby="basic-addon1"/>
+    <p th:if="${#fields.hasErrors('user_birthday')}" th:errors="*{user_birthday}"
+          th:class="${#fields.hasErrors('user_birthday')}? errors"></p><br>
+
+    <p style = "margin-left: 400px">Card:</p>
+    <input style="width: 500px; margin-left: 400px" type = "text" name = "user_idCard" th:field=" *{user_idCard}" class="form-control" aria-describedby="basic-addon1"/>
+    <p th:if="${#fields.hasErrors('user_idCard')}" th:errors="*{user_idCard}"
+          th:class="${#fields.hasErrors('user_idCard')}? errors"></p><br>
+
+    <p style = "margin-left: 400px">Phone:</p>
+    <input style="width: 500px; margin-left: 400px" type = "text" name = "user_phone" th:field="*{user_phone}" class="form-control" aria-describedby="basic-addon1"/>
+    <p th:if="${#fields.hasErrors('user_phone')}" th:errors="*{user_phone}"
+          th:class="${#fields.hasErrors('user_phone')}? errors"></p><br>
+
+    <p style = "margin-left: 400px">Email:</p>
+    <input style="width: 500px; margin-left: 400px" type = "text" name = "user_email" th:field="*{user_email}" class="form-control" aria-describedby="basic-addon1"/>
+    <p th:if="${#fields.hasErrors('user_email')}" th:errors="*{user_email}"
+          th:class="${#fields.hasErrors('user_email')}? errors"></p><br>
+
+    <p style = "margin-left: 400px">Address:</p>
+    <input style="width: 500px; margin-left: 400px" type = "text" name = "user_address" th:field="*{user_address}" class="form-control" aria-describedby="basic-addon1"/>
+    <p th:if="${#fields.hasErrors('user_address')}" th:errors="*{user_address}"
+          th:class="${#fields.hasErrors('user_address')}? errors"></p><br>
+
+    <input style = "margin-left: 680px "   type = "submit" value="Save">
+    <a th:href="@{/camping/listUserAdmin}" style = "margin-left: 5px" class="btn btn-light">Back</a>
+
+
+    <ul>
+        <li th:each="error :${#fields.allErrors()} " th:text="${error}"></li>
+    </ul>
+</form>
+
+<footer class="footer">
+    <div class="container" style="margin-left: 200px;">
+        <div class="row">
+            <div class="footer-col">
+                <h4>CONTACTS</h4>
+                <ul style="margin-right: -50px">
+                    <li><p>TEL: +84 901 561 777</p></li>
+                    <li><p>HOTLINE: +84 966 461 777</p></li>
+                    <li><p>EMAIL: cococamping@gmail.com</p></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>INFORMATION</h4>
+                <ul>
+                    <li><a href="#">CUSTOMERS CARE</a></li>
+                    <li><a href="#">RESERVATION</a></li>
+                    <li><a href="#">SALES & MARKETING</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>SERVICES</h4>
+                <ul>
+                    <li><a href="#">COCO CAMPING</a></li>
+                    <li><a href="#">COCO FOOD & DRINK</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>FOLLOW US</h4>
+                <div class="social-links">
+                    <a href="#"><i style="margin-top: 15px" class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i style="margin-top: 15px" class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-c">
+                Copyright © 2022 COCO CAMPING . All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+</html>
