@@ -1,0 +1,121 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Service List</title>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="menu">
+            <div class="logo">
+                <a href="/camping">COCO ECOLODGE</a>
+            </div>
+            <ul>
+                <li><a href="/camping">HOME</a>
+                <li><a href="listServiceAdmin">COCO CAMPING</a>
+                <li><a href="listAttachServiceAdmin">ATTACH SERVICE</a></li>
+                <li><a href="">CUSTOMER</a></li>
+                <li><a href="">CONTACTS</a></li>
+                <li><a href="login">LOGIN</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<h3 style = "text-align: center; margin-top: 50px; margin-bottom: 50px">List of service</h3>
+
+<form style = "float: left" th:action = "@{'/camping/listServiceAdmin'}" method = "get">
+    <input class="input-group-text" style = "float: left; margin-left: 100px; width: 250px" name = "serviceNameSearch" placeholder="Enter name service">
+    <select class="form-select" style = "float:left; margin-left: 2px; width: 217px" name = "attachServiceIdSearch">
+        <option value="">Select attach service</option>
+        <option th:each = "asl:${attachServiceList}" th:value = "${asl.attach_service_id}" th:text="${asl.attach_service_name}"></option>
+    </select>
+    <button class="btn btn-warning" style = "margin-left: 2px; float: left" type="submit">Search</button>
+</form>
+
+<a style = "float: left; margin-left: 300px" class="btn btn-warning" th:href="@{/camping/listServiceAdmin/create}">Add new service</a>
+
+<br>
+
+<table class="table table-striped table-hover" style = "width: 90%; margin-left: 60px; margin-top: 50px">
+    <tr style="background: #fdcb6e">
+        <th scope="col">STT</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name of service</th>
+        <th scope="col">Cost (VND)</th>
+        <th scope="col">Max people</th>
+        <th scope="col">Attach service</th>
+        <th scope="col">Action</th>
+    </tr>
+    <tr th:each = "service, status: ${services}">
+        <td style = "padding-top: 45px; text-align: center" th:text = "${status.index + 1}"></td>
+        <td><img style = "width: 100px; height: 100px" th:src = "${service.getService_image()}" class="card-img-top" alt="..."></td>
+        <td style = "padding-top: 45px" th:text = "${service.getService_name()}"></td>
+        <td style = "padding-top: 45px" th:text = "${service.getService_cost()}"></td>
+        <td style = "padding-top: 45px" th:text = "${service.getService_max_people()}"></td>
+        <td style = "padding-top: 45px" th:text = "${service.getAttachService().getAttach_service_name()}"></td>
+        <td style = "padding-top: 45px">
+<!--            <button  type="button" class="btn btn-warning">Edit-->
+                <a class="btn btn-warning" th:href="@{listServiceAdmin/edit(service_id=${service.getService_id()})}">Edit</a>
+<!--            </button>-->
+<!--            <button type="button" class="btn btn-warning">Edit-->
+                <a class="btn btn-warning" th:href="@{listServiceAdmin/delete(service_id=${service.getService_id()})}">Delete</a>
+<!--            </button>-->
+        </td>
+    </tr>
+</table>
+
+<div style = "float: left; margin-left: 550px">
+    <a  th:href = "@{'/camping/listServiceAdmin'(page=${services.number - 1}, service_name = ${serviceNameSearch}, attach_service_id = ${attachServiceIdSearch})}" th:if="${services.hasPrevious()}">Previous</a>
+    <span th:text="${services.number + 1}"></span>/<span th:text="${services.totalPages}"></span>
+    <a th:href = "@{'/camping/listServiceAdmin'(page=${services.number + 1}, service_name = ${serviceNameSearch}, attach_service_id = ${attachServiceIdSearch})}" th:if="${services.hasNext()}">Next</a>
+</div>
+<a class="btn btn-light" style="margin-left: 300px" href="/home">Back to home</a>
+
+<footer class="footer">
+    <div class="container" style="margin-left: 200px;">
+        <div class="row">
+            <div class="footer-col">
+                <h4>CONTACTS</h4>
+                <ul style="margin-right: -50px">
+                    <li><p>TEL: +84 901 561 777</p></li>
+                    <li><p>HOTLINE: +84 966 461 777</p></li>
+                    <li><p>EMAIL: cococamping@gmail.com</p></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>INFORMATION</h4>
+                <ul>
+                    <li><a href="#">CUSTOMERS CARE</a></li>
+                    <li><a href="#">RESERVATION</a></li>
+                    <li><a href="#">SALES & MARKETING</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>SERVICES</h4>
+                <ul>
+                    <li><a href="#">COCO CAMPING</a></li>
+                    <li><a href="#">COCO FOOD & DRINK</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>FOLLOW US</h4>
+                <div class="social-links">
+                    <a href="#"><i style="margin-top: 15px" class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i style="margin-top: 15px" class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-c">
+                Copyright © 2022 COCO CAMPING . All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
