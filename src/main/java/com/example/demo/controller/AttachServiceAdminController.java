@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.AttachServiceDTO;
 import com.example.demo.model.AttachService;
 import com.example.demo.service.IAttachServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,27 @@ import java.util.Optional;
 public class AttachServiceAdminController {
     @Autowired
     IAttachServiceService iAttachServiceService;
+
+    @GetMapping("create")
+    public String showCreateAttachService(Model model) {
+        model.addAttribute("attachServiceDTO", new AttachServiceDTO());
+        return "camping/admin/createAttachService";
+    }
+
+    @PostMapping("save")
+    public String save(@ModelAttribute @Validated AttachServiceDTO attachServiceDTO, BindingResult bindingResult, Model model){
+        AttachService attachService = new AttachService();
+        if (bindingResult.hasErrors()){
+            model.addAttribute("mess", "Add not successfully!");
+            return "camping/admin/listAttachService";
+        }else {
+            BeanUtils.copyProperties(attachServiceDTO, attachService);
+            iAttachServiceService.save(attachService);
+            model.addAttribute("attachServiceDTO", attachServiceDTO);
+            model.addAttribute("mess", "Add successfully!");
+        }
+        return "redirect:/camping/listAttachServiceAdmin";
+    }
 
     @GetMapping("edit")
     public String showEditAttachService(Model model, @RequestParam int attach_service_id) {
