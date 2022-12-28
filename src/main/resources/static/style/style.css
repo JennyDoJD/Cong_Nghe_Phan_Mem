@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body{
+    /*line-height: 1.5;*/
+    font-family: 'Poppins', sans-serif;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+header{
+    position: relative;
+    background-size: cover;
+    height: 600px;
+    width: 100%;
+    background-position: center;
+    background: url("https://havicotour.com.vn/wp-content/uploads/2020/08/l%E1%BB%81u-c%E1%BA%AFm-tr%E1%BA%A1i.jpg") no-repeat;
+    background-size: 1250px;
+}
+
+header::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+nav{
+    position: fixed;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1;
+}
+
+nav .logo a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+nav .menu{
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.menu ul{
+    display: flex;
+}
+
+.menu ul li{
+    list-style: none;
+    margin-left: 7px;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+.menu ul li.active a{
+    background: #fdcb6e;
+    color: #000;
+}
+
+.menu ul li a:hover{
+    background: #fdcb6e;
+    color: #000;
+
+}
+
+.container{
+    max-width: 1170px;
+    margin-left: 250px;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul{
+    list-style: none;
+}
+
+.footer{
+    background-color: #fdcb6e;
+    padding: 70px 0;
+    overflow-x: hidden;
+    margin-top: 50px
+}
+
+.footer-col{
+    width: 25%;
+    padding: 0 15px;
+}
+
+.footer-col h4{
+    font-size: 18px;
+    color: black;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-col h4::before{
+    content: '';
+    position: absolute;
+    left:0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 300;
+    color: white;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li p{
+    font-size: 16px;
+    text-transform: none;
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 300;
+    color: white;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover{
+    color: #ccc;
+    padding-left: 8px;
+}
+
+.footer-col .social-links a{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255,255,255,0.2);
+    margin:0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: white;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover{
+    color: #24262b;
+    background-color: #ffffff;
+}
+
+.footer-c{
+    margin-left: 300px;
+    margin-top: 50px;
+    font-size: 15px;
+}
+
+@media(max-width: 767px){
+    .footer-col{
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width: 574px){
+    .footer-col{
+        width: 100%;
+    }
+}
+
+::selection{
+    background: rgba(26,188,156,0.3);
+}
+.container{
+    max-width: 990px;
+    padding: 0 20px;
+    margin: 120px auto;
+}
+.wrapper{
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
+}
+.wrapper .title{
+    height: 90px;
+    background: #fdcb6e;
+    border-radius: 5px 5px 0 0;
+    color: black;
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper form{
+    padding: 30px 25px 25px 25px;
+}
+.wrapper form .row{
+    height: 45px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.wrapper form .row input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    padding-left: 60px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+form .row input:focus{
+    border-color: #fdcb6e;
+    box-shadow: inset 0px 0px 2px 2px rgba(26,188,156,0.25);
+}
+form .row input::placeholder{
+    color: #999;
+}
+.wrapper form .row i{
+    position: absolute;
+    width: 47px;
+    height: 100%;
+    color: black;
+    font-size: 18px;
+    background: #fdcb6e;
+    border: 1px solid #fdcb6e;
+    border-radius: 5px 0 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper form .pass{
+    margin: -8px 0 20px 0;
+}
+.wrapper form .pass a{
+    color: black;
+    font-size: 17px;
+    text-decoration: none;
+}
+.wrapper form .pass a:hover{
+    text-decoration: underline;
+}
+.wrapper form .button input{
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 0px;
+    background: #fdcb6e;
+    border: 1px solid #fdcb6e;
+    cursor: pointer;
+}
+form .button input:hover{
+    background: #fdcb6e;
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.cardFooter {
+    /*background-color: orange;*/
+    height: 40px;
+    width: 100%;
+}
+
+.cardFooter span {
+    /*background-color: chartreuse;*/
+    float: left;
+    margin-left: 50px;
+    margin-top: 6px;
+}
+
+.cardFooter button {
+    /*background-color: darkseagreen;*/
+    float: right;
+    margin-right: 50px;
+}
+
+.intro {
+    /*background-color: darkseagreen;*/
+    margin-top: 50px;
+    width: 100%;
+    height: 250px;
+}
+
+.intro h2 {
+    height: 50px;
+    width: 20%;
+    /*background-color: chartreuse;*/
+    float: left;
+    margin-left: 25px;
+    margin-top: 90px;
+}
+
+.intro img {
+    width: 400px;
+    height: 250px;
+    float: left;
+    margin-left: 30px;
+}
+
+.text {
+    float: left;
+    margin-left: 20px;
+    width: 40%;
+}
+
+.food {
+    /*background-color: orange;*/
+    width: 100%;
+    height: 300px;
+    margin-top: 50px;
+    float: left;
+}
+
+.service {
+    margin-bottom: 50px;
+}
+
+.textService {
+    width: 45%;
+    float: right;
+}
+
+.login {
+    width: auto;
+    height: auto;
+    margin-left: 300px;
+    margin-right: 200px;
+    margin-top: 30px;
+    border-radius: 15px 50px;
+}
+
+.login img {
+    width: 160px;
+    height: 120px;
+    float: left;
+}
+
+.login h3{
+    float: left;
+    padding-top: 25px;
+    padding-left: 150px;
+}
+
